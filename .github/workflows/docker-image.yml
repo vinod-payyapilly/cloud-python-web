@@ -15,4 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag cloud-python-web:latest
+      run: |
+        REPOSITORY=$(echo $GITHUB_REPOSITORY)  
+        docker build . --file Dockerfile --tag ghcr.io/vinod-payyapilly/$REPOSITORY
+        docker run ghcr.io/vinod-payyapilly/$REPOSITORY
+        docker push ghcr.io/vinod-payyapilly/$REPOSITORY
+      
